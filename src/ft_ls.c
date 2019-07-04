@@ -87,8 +87,9 @@ void
 	i = -1;
 	while (++i < len)
 	{
-		ft_printf("%s %10ld %15s %s",
+		ft_printf("%s %d %10ld %15s %s",
 		info[i].mode,
+		info[i].buff.st_nlink,
 		info[i].buff.st_size,
 		info[i].entry->d_name,
 		info[i].time);
