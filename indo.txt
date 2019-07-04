@@ -1,2 +1,3 @@
 http://pubs.opengroup.org/onlinepubs/7908799/xsh/sysstat.h.html
 https://www.opennet.ru/man.shtml?topic=stat&category=2&russian=0
+http://www.codenet.ru/progr/cpp/spru/stat.php
