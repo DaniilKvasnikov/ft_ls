@@ -39,11 +39,15 @@ t_path_info
 	char		*str;
 
 	stat(entry->d_name, &buff);
+	res.time = ft_strdup(ctime(&buff.st_mtime) + 4);
+	res.time[12] = '\0';
 	str = ft_rebase(buff.st_mode, 8);
-	res.time = ctime(&buff.st_mtime);
 	res.mode = get_mod(str);
+	free(str);
 	res.entry = entry;
 	res.buff = buff;
+	res.owner = getpwuid(buff.st_uid);
+	res.group = getpwuid(buff.st_gid);
 	return (res);
 }
 
@@ -87,13 +91,18 @@ void
 	i = -1;
 	while (++i < len)
 	{
-		ft_printf("%s %d %10ld %15s %s",
+		ft_printf("%s %d %s %s %8ld %s %s\n",
 		info[i].mode,
 		info[i].buff.st_nlink,
+		info[i].owner->pw_name,
+		info[i].group->pw_name,
 		info[i].buff.st_size,
-		info[i].entry->d_name,
-		info[i].time);
+		info[i].time,
+		info[i].entry->d_name);
+		free(info[i].mode);
+		free(info[i].time);
 	}
+	free(info);
 	return ;
 }
 
