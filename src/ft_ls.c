@@ -146,35 +146,49 @@ int
 }
 
 char
+	*ft_stradd(char *dest, char *source)
+{
+	char	*res;
+
+	res = ft_strnew(ft_strlen(dest) + ft_strlen(source) + 1);
+	ft_bzero(res, ft_strlen(dest) + ft_strlen(source) + 1);
+	res = ft_strcpy(res, dest);
+	// res = ft_strcat(res, source);
+	free(dest);
+	return (res);
+}
+
+char
 	*get_print_str(t_path_info *info, int min, int max)
 {
 	char *str;
 	char *num;
 
-	str = ft_strnew(200);
-	ft_bzero(str, 200);
-	ft_strcat(str, "%-");
-	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_mod))));
+	// str = (char *)malloc(sizeof(char) * 1);
+	str = ft_strdup("a");
+	ft_printf("[%s]\n", str);
+	ft_stradd(str, "%-");
+	ft_stradd(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_mod))));
 	free(num);
-	ft_strcat(str, "s%");
-	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_st_nlink))));
+	ft_stradd(str, "s%");
+	ft_stradd(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_st_nlink))));
 	free(num);
-	ft_strcat(str, "d%");
-	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_pw_name))));
+	ft_stradd(str, "d%");
+	ft_stradd(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_pw_name))));
 	free(num);
-	ft_strcat(str, "s%");
-	ft_strcat(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_gr_name))));
+	ft_stradd(str, "s%");
+	ft_stradd(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_gr_name))));
 	free(num);
-	ft_strcat(str, "s%");
-	ft_strcat(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_st_size))));
+	ft_stradd(str, "s%");
+	ft_stradd(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_st_size))));
 	free(num);
-	ft_strcat(str, "ld%");
-	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_time))));
+	ft_stradd(str, "ld%");
+	ft_stradd(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_time))));
 	free(num);
-	ft_strcat(str, "s %-");
-	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_d_name))));
+	ft_stradd(str, "s %-");
+	ft_stradd(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_d_name))));
 	free(num);
-	ft_strcat(str, "s\n");
+	ft_stradd(str, "s\n");
 	ft_printf("[%s]\n", str);
 	return (str);
 }
@@ -196,13 +210,17 @@ void
 	dir = opendir(path);
 	i = 0;
 	while ( (entry = readdir(dir)) != NULL)
+	{
+		ft_printf("%s\n", entry->d_name);
 		info[i++] = get_info(entry);
+	}
 	closedir(dir);
-	ft_quicksort(info, 0, len - 1);
+	// ft_quicksort(info, 0, len - 1);
 	i = -1;
 	str = get_print_str(info, 0, len - 1);
 	while (++i < len)
 	{
+		// ft_printf("%s\n", info[i].entry->d_name);//"%s %d %s %s %ld %s %s\n"
 		ft_printf(str,
 		info[i].mode,
 		info[i].buff.st_nlink,
@@ -214,7 +232,7 @@ void
 		free(info[i].mode);
 		free(info[i].time);
 	}
-	free(str);
+	// free(str);
 	free(info);
 	return ;
 }
