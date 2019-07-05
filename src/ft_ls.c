@@ -47,7 +47,7 @@ t_path_info
 	res.entry = entry;
 	res.buff = buff;
 	res.owner = getpwuid(buff.st_uid);
-	res.group = getpwuid(buff.st_gid);
+	res.group = getgrgid(buff.st_gid);
 	return (res);
 }
 
@@ -69,6 +69,116 @@ static int
 	return (i);
 }
 
+int
+	get_max_mode(t_path_info *info, int max_l, int (*get)(t_path_info obj))
+{
+	int max;
+	int	tmp;
+	int i;
+
+	max = get(info[0]);
+	i = -1;
+	while (++i <= max_l)
+	{
+		tmp = get(info[i]);
+		if (tmp > max)
+			max = tmp;
+	}
+	return (max);
+}
+
+int
+	num_len(int n)
+{
+	int i;
+	int nbr;
+
+	nbr = n;
+	i = 0;
+	while (nbr > 0)
+	{
+		i++;
+		nbr /= 10;
+	}
+	return (i);
+}
+
+int
+	get_info_st_nlink(t_path_info obj)
+{
+	return (num_len(obj.buff.st_nlink));
+}
+
+int
+	get_info_st_size(t_path_info obj)
+{
+	return (num_len(obj.buff.st_size));
+}
+
+int
+	get_info_mod(t_path_info obj)
+{
+	return (ft_strlen(obj.mode));
+}
+
+int
+	get_info_pw_name(t_path_info obj)
+{
+	return (ft_strlen(obj.owner->pw_name));
+}
+
+int
+	get_info_gr_name(t_path_info obj)
+{
+	return (ft_strlen(obj.group->gr_name));
+}
+
+int
+	get_info_time(t_path_info obj)
+{
+	return (ft_strlen(obj.time));
+}
+
+int
+	get_info_d_name(t_path_info obj)
+{
+	return (ft_strlen(obj.entry->d_name));
+}
+
+char
+	*get_print_str(t_path_info *info, int min, int max)
+{
+	char *str;
+	char *num;
+
+	str = ft_strnew(200);
+	ft_bzero(str, 200);
+	ft_strcat(str, "%-");
+	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_mod))));
+	free(num);
+	ft_strcat(str, "s%");
+	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_st_nlink))));
+	free(num);
+	ft_strcat(str, "d%");
+	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_pw_name))));
+	free(num);
+	ft_strcat(str, "s%");
+	ft_strcat(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_gr_name))));
+	free(num);
+	ft_strcat(str, "s%");
+	ft_strcat(str, (num = ft_itoa(2 + get_max_mode(info, max, &get_info_st_size))));
+	free(num);
+	ft_strcat(str, "ld%");
+	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_time))));
+	free(num);
+	ft_strcat(str, "s %-");
+	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_d_name))));
+	free(num);
+	ft_strcat(str, "s\n");
+	ft_printf("[%s]\n", str);
+	return (str);
+}
+
 void
     ft_print_dir(char *path)
 {    
@@ -77,6 +187,7 @@ void
 	int			i;
 	int			len;
 	t_path_info	*info;
+	char		*str;
 
 	len = ft_count_dir(path);
 	if (len < 0)
@@ -87,21 +198,23 @@ void
 	while ( (entry = readdir(dir)) != NULL)
 		info[i++] = get_info(entry);
 	closedir(dir);
-	
+	ft_quicksort(info, 0, len - 1);
 	i = -1;
+	str = get_print_str(info, 0, len - 1);
 	while (++i < len)
 	{
-		ft_printf("%s %d %s %s %8ld %s %s\n",
+		ft_printf(str,
 		info[i].mode,
 		info[i].buff.st_nlink,
 		info[i].owner->pw_name,
-		info[i].group->pw_name,
+		info[i].group->gr_name,
 		info[i].buff.st_size,
 		info[i].time,
 		info[i].entry->d_name);
 		free(info[i].mode);
 		free(info[i].time);
 	}
+	free(str);
 	free(info);
 	return ;
 }
