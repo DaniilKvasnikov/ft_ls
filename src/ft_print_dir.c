@@ -44,7 +44,7 @@ char
 }
 
 t_path_info
-	*get_link_ls(char *name, char *path)
+	*get_link_ls(t_path_info *parent,char *name, char *path)
 {
 	char		buf[1024];
 	int			len;
@@ -59,6 +59,7 @@ t_path_info
 	buf[len] = '\0';
 	res = (t_path_info *)malloc(sizeof(t_path_info));
 	*res = get_info(buf, ".");
+	parent->link_name = ft_strdup(res->name);
 	return (res);
 }
 
@@ -73,9 +74,12 @@ t_path_info
 	name_path = ft_stradd_3(path, "/", name);
 	stat(name_path, &buff);
 	free(name_path);
-	res.link = get_link_ls(name, path);
-	res.time_all = buff.st_mtime;
-	res.time = ft_strdup(ctime(&buff.st_mtime) + 4);
+	res.link = get_link_ls(&res, name, path);
+	if (res.link)
+		res.time_all = buff.st_mtime;
+	else
+		res.time_all = buff.st_mtime;
+	res.time = ft_strdup(ctime(&buff.st_ctime) + 4);
 	res.time[12] = '\0';
 	res.folder = is_folder(buff);
 	str = ft_rebase(buff.st_mode, 8);
@@ -114,8 +118,8 @@ static int
 	return (i);
 }
 
-t_path_info
-	*get_info_file(char *path, int *len)
+t_ls_block
+	get_info_file(char *path, int *len)
 {
 	t_path_info	*info;
 
@@ -127,9 +131,9 @@ t_path_info
 		ft_putstr_fd("ls: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		return (NULL);
+		return ((t_ls_block){NULL, NOT_FOUND});
 	}
-	return (info);
+	return ((t_ls_block){info, ITS_FILE});
 }
 
 t_ls_block
@@ -143,7 +147,7 @@ t_ls_block
 
 	*len = ft_count_dir(path, flag);
 	if (*len == 0)
-		return ((t_ls_block){get_info_file(path, len), 0});
+		return (get_info_file(path, len));
 	if (*len == -1)
 		*len = 0;
 	info = (t_path_info *)malloc(sizeof(t_path_info) * (*len));
@@ -155,7 +159,7 @@ t_ls_block
 			return ((t_ls_block){NULL, PER_DEN});
 		if (*len > 0)
 			free(info);
-		return ((t_ls_block){get_info_file(path, len), ITS_FILE});
+		return (get_info_file(path, len));
 	}
 	i = 0;
 	while ( (entry = readdir(dir)) != NULL)

@@ -15,17 +15,22 @@ void
 static int
     ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag)
 {
-    long long cmp;
+    int name;
+    int time;
+    int cmp;
 
-    cmp = 0;
-    if (is_flag_ls(flag, 't'))
-        cmp = obj2->time_all - obj1->time_all;
-    if (cmp == 0)
-        cmp = ft_strcmp(obj1->name, obj2->name);
-    if (is_flag_ls(flag, 'r'))
-        return (cmp > 0);
+    name = (ft_strcmp(obj1->name, obj2->name) < 0);
+    time = (obj1->time_all > obj2->time_all);
+    if (!is_flag_ls(flag, 't'))
+        cmp = name;
+    else if (obj1->time_all == obj2->time_all)
+        cmp = name;
     else
-        return (cmp < 0);
+        cmp = time;
+    if (is_flag_ls(flag, 'r'))
+        return (!cmp);
+    else
+        return (cmp);
 }
 
 static int
