@@ -26,7 +26,7 @@ void
 				ft_printf(str, b.info[i].mode, b.info[i].buff.st_nlink,
 					b.info[i].owner->pw_name, b.info[i].group->gr_name,
 					b.info[i].buff.st_size, b.info[i].time, b.info[i].name);
-				if (b.info[i].link != NULL)
+				if (b.info[i].link_name != NULL)
 					ft_printf(" -> %s", b.info[i].link_name);
 				ft_printf("\n");
 			}
@@ -37,16 +37,9 @@ void
 				ft_printf("%s", b.info[i].name);
 			if ((b.info[i].name[0] != '.' || is_flag_ls(flag, 'a')) &&
 					b.error != ITS_FILE)
-			{
-				if (is_flag_ls(flag, '1'))
-					ft_putchar('\n');
-				else if (i < (len - 1))
-					ft_putchar(' ');
-			}
+				ft_putchar('\n');
 		}
 	}
-	if (!is_flag_ls(flag, '1') && !is_flag_ls(flag, 'l') && len > 0)
-		ft_putchar('\n');
 	if (len > 0)
 		free(str);
 }
