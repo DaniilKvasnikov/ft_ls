@@ -23,14 +23,15 @@ typedef struct  group   t_group;
 
 typedef struct	s_path_info
 {
-	char        *mode;
-	char		*name;
-	t_stat      buff;
-	char        *time;
-	t_passwd    *owner;
-	t_group     *group;
-	long long	time_all;
-	int			folder;
+	char				*mode;
+	char				*name;
+	t_stat				buff;
+	char				*time;
+	t_passwd			*owner;
+	t_group				*group;
+	long long			time_all;
+	int					folder;
+	struct s_path_info	*link;
 }				t_path_info;
 
 typedef struct	s_ls_block
@@ -54,6 +55,7 @@ void    		ft_quicksort(t_path_info *arr, int low, int high, char *flag);
 void			ft_ls_dop(char **path, char *flag, int is_recursion);
 char			*ft_stradd_3(char *s1, char *s2, char *s3);
 
+t_path_info		get_info(char *name, char *path);
 int				is_folder(t_stat buff);
 int				is_folder_path(char *path);
 

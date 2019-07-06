@@ -22,9 +22,14 @@ void
 		if (is_flag_ls(flag, 'l'))
 		{
 			if (b.info[i].name[0] != '.' || is_flag_ls(flag, 'a'))
+			{
 				ft_printf(str, b.info[i].mode, b.info[i].buff.st_nlink,
 					b.info[i].owner->pw_name, b.info[i].group->gr_name,
 					b.info[i].buff.st_size, b.info[i].time, b.info[i].name);
+				if (b.info[i].link != NULL)
+					ft_printf(" -> %s", b.info[i].link->name);
+				ft_printf("\n");
+			}
 		}
 		else
 		{

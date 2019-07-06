@@ -44,6 +44,25 @@ char
 }
 
 t_path_info
+	*get_link_ls(char *name, char *path)
+{
+	char		buf[1024];
+	int			len;
+	t_path_info	*res;
+	char		*name_path;
+
+	name_path = ft_stradd_3(path, "/", name);
+	len = readlink(name_path, buf, sizeof(buf)-1);
+	free(name_path);
+	if (len == -1)
+		return (NULL);
+	buf[len] = '\0';
+	res = (t_path_info *)malloc(sizeof(t_path_info));
+	*res = get_info(buf, ".");
+	return (res);
+}
+
+t_path_info
 	get_info(char *name, char *path)
 {
 	t_stat		buff;
@@ -54,6 +73,7 @@ t_path_info
 	name_path = ft_stradd_3(path, "/", name);
 	stat(name_path, &buff);
 	free(name_path);
+	res.link = get_link_ls(name, path);
 	res.time_all = buff.st_mtime;
 	res.time = ft_strdup(ctime(&buff.st_mtime) + 4);
 	res.time[12] = '\0';

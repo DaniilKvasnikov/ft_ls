@@ -104,7 +104,7 @@ char
 	ft_strcat(str, "ld%");
 	ft_strcat(str, (num = ft_itoa(1 + get_max_mode(info, max, &get_info_time))));
 	free(num);
-	ft_strcat(str, "s %-s\n");
+	ft_strcat(str, "s %-s");
 	// ft_printf("[%s]\n", str);
 	return (str);
 }
