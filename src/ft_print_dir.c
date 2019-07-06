@@ -126,10 +126,13 @@ t_ls_block
 	*len = 1;
 	info = (t_path_info *)malloc(sizeof(t_path_info) * (*len));
 	*info = get_info(path, ".");
-	if (info->owner == NULL || info->group == NULL)
+	if (info->owner == NULL || info->group == NULL || ft_strlen(path) == 0)
 	{
 		ft_putstr_fd("ls: ", 2);
-		ft_putstr_fd(path, 2);
+		if (ft_strlen(path) > 0)
+			ft_putstr_fd(path, 2);
+		else
+			ft_putstr_fd("fts_open", 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
 		return ((t_ls_block){NULL, NOT_FOUND});
 	}

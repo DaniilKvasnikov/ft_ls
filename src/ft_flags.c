@@ -7,6 +7,7 @@ int
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
+	ft_putstr_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);
 	return (0);
 }
 
@@ -31,6 +32,6 @@ int
 	while (flag[++i] != '\0')
 		if (flag[i] != 'l' && flag[i] != 'R' && flag[i] != '1' &&
 			flag[i] != 'a' && flag[i] != 'r' && flag[i] != 't')
-			return (error_log("Not found flag: ", flag[i]));
+			return (error_log("/bin/ls: illegal option -- ", flag[i]));
 	return (1);
 }

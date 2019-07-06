@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "./ft_ls",
-			"args": ["does_not_exit"]
+			"args": ["\"\"]
 		}
 	]
 }

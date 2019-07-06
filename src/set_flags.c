@@ -24,8 +24,8 @@ char
     ft_strclr(res);
 	i = -1;
 	while (++i < argc)
-		if (argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
-            if (argv[i][1] != '-')
+		if (argv[i][0] == '-' && ft_strlen(argv[i]) != 1)
+            if (argv[i][1] != '-' || ft_strlen(argv[i]) != 2)
             {
                 j = 0;
                 while (argv[i][++j] != '\0')
