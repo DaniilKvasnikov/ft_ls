@@ -2,7 +2,8 @@
 
 #include "ft_ls.h"
 
-void    swap(t_path_info *a, t_path_info *b)
+void
+    swap(t_path_info *a, t_path_info *b)
 {
     t_path_info tmp;
 
@@ -11,7 +12,24 @@ void    swap(t_path_info *a, t_path_info *b)
     *b = tmp;
 }
 
-int     partition(t_path_info *arr, int low, int high)
+static int
+    ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag)
+{
+    long long cmp;
+
+    cmp = 0;
+    if (is_flag_ls(flag, 't'))
+        cmp = obj2->time_all - obj1->time_all;
+    if (cmp == 0)
+        cmp = ft_strcmp(obj1->name, obj2->name);
+    if (is_flag_ls(flag, 'r'))
+        return (cmp > 0);
+    else
+        return (cmp < 0);
+}
+
+static int
+    partition(t_path_info *arr, int low, int high, char *flag)
 {
     t_path_info pivot;
     int         i;
@@ -22,7 +40,7 @@ int     partition(t_path_info *arr, int low, int high)
     j = low - 1;
     while (++j <= (high - 1))
     {
-        if (ft_strcmp(arr[j].entry->d_name, pivot.entry->d_name) < 0)
+        if (ft_cmp(&arr[j], &pivot, flag))
         {
             i++;
             swap(&arr[i], &arr[j]);
@@ -32,14 +50,15 @@ int     partition(t_path_info *arr, int low, int high)
     return (i + 1);
 }
 
-void    ft_quicksort(t_path_info *arr, int low, int high)
+void
+    ft_quicksort(t_path_info *arr, int low, int high, char *flag)
 {
     int pi;
 
     if (low < high)
     {
-        pi = partition(arr, low, high);
-        ft_quicksort(arr, low, pi - 1);
-        ft_quicksort(arr, pi + 1, high);
+        pi = partition(arr, low, high, flag);
+        ft_quicksort(arr, low, pi - 1, flag);
+        ft_quicksort(arr, pi + 1, high, flag);
     }
 }

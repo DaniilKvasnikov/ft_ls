@@ -25,10 +25,11 @@ char
 	i = -1;
 	while (++i < argc)
 		if (argv[i][0] == '-' && ft_strlen(argv[i]) > 1)
-        {
-            j = 0;
-            while (argv[i][++j] != '\0')
-                add_char(res, argv[i][j]);
-        }
+            if (argv[i][1] != '-')
+            {
+                j = 0;
+                while (argv[i][++j] != '\0')
+                    add_char(res, argv[i][j]);
+            }
 	return (res);
 }

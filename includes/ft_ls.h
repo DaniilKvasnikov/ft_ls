@@ -11,6 +11,10 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <grp.h>
+#include <time.h>
+
+#define PER_DEN -1
+#define ITS_FILE 1
 
 typedef struct  dirent  t_dirent;
 typedef struct  stat    t_stat;
@@ -20,17 +24,38 @@ typedef struct  group   t_group;
 typedef struct	s_path_info
 {
 	char        *mode;
-	t_dirent    *entry;
+	char		*name;
 	t_stat      buff;
 	char        *time;
 	t_passwd    *owner;
 	t_group     *group;
+	long long	time_all;
+	int			folder;
 }				t_path_info;
 
-char    **set_paths(int argc, char **argv);
-char    *set_flags(int argc, char **argv);
-void    ft_ls(char **path, char *flag);
+typedef struct	s_ls_block
+{
+	t_path_info	*info;
+	int			error;
+}				t_ls_block;
 
-void    ft_quicksort(t_path_info *arr, int low, int high);
+char    		**set_paths(int argc, char **argv);
+char    		*set_flags(int argc, char **argv);
+void    		ft_ls(char **path, char *flag);
+t_ls_block		ft_print_dir(char *path, char *flag, int *len);
+void			ft_print_ls(t_ls_block block, int len, char *flag);
 
+char			*get_print_str(t_path_info *info, int min, int max);
+
+int				is_flag_ls(char *flags, char flag);
+int				check_flags_ls(char *flag);
+void    		ft_quicksort(t_path_info *arr, int low, int high, char *flag);
+
+void			ft_ls_dop(char **path, char *flag, int is_recursion);
+char			*ft_stradd_3(char *s1, char *s2, char *s3);
+
+int				is_folder(t_stat buff);
+int				is_folder_path(char *path);
+
+void			ft_path_sort(char	**paths);
 #endif

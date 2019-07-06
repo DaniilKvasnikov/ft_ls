@@ -6,13 +6,14 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 01:14:57 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/01/14 11:07:53 by rgyles           ###   ########.fr       */
+/*   Updated: 2019/07/06 13:01:42 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		is_flag(t_spec *elem, char c)
+static int
+	is_flag(t_spec *elem, char c)
 {
 	if (c == '-')
 		return (elem->flag.minus = 1);
@@ -27,7 +28,8 @@ int		is_flag(t_spec *elem, char c)
 	return (0);
 }
 
-char	*get_flags(t_spec *elem, char *str)
+char
+	*get_flags(t_spec *elem, char *str)
 {
 	int	index;
 

@@ -3,6 +3,7 @@
         "stdlib.h": "c",
         "ft_ls.h": "c",
         "time.h": "c",
-        "ft_printf.h": "c"
+        "ft_printf.h": "c",
+        "types.h": "c"
     }
 }
