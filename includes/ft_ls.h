@@ -32,7 +32,7 @@ typedef struct	s_path_info
 	t_group				*group;
 	long long			time_all;
 	int					folder;
-	struct s_path_info	*link;
+	int					link;
 	char				*link_name;
 }				t_path_info;
 
@@ -57,7 +57,7 @@ void			ft_quicksort(t_path_info *arr, int low, int high, char *flag);
 void			ft_ls_dop(char **path, char *flag, int is_recursion);
 char			*ft_stradd_3(char *s1, char *s2, char *s3);
 
-t_path_info		get_info(char *name, char *path);
+t_path_info		get_info(char *name, char *path, int is_link);
 int				is_folder(t_stat buff);
 int				is_folder_path(char *path);
 

@@ -26,7 +26,7 @@ void
 				ft_printf(str, b.info[i].mode, b.info[i].buff.st_nlink,
 					b.info[i].owner->pw_name, b.info[i].group->gr_name,
 					b.info[i].buff.st_size, b.info[i].time, b.info[i].name);
-				if (b.info[i].link_name != NULL)
+				if (b.info[i].link != 0)
 					ft_printf(" -> %s", b.info[i].link_name);
 				ft_printf("\n");
 			}
