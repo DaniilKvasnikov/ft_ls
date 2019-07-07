@@ -24,7 +24,9 @@ static int
     if (!is_flag_ls(flag, 't'))
         cmp = name;
     else if (obj1->time_all == obj2->time_all)
+    {
         cmp = name;
+    }
     else
         cmp = time;
     if (is_flag_ls(flag, 'r'))

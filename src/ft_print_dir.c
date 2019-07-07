@@ -94,6 +94,7 @@ t_path_info
 	free(name_path);
 	res.time = ft_strdup(ctime(&buff.st_ctime) + 4);
 	res.time[12] = '\0';
+	res.time_all = buff.st_ctime;
 	res.folder = is_folder(buff);
 	str = ft_rebase(buff.st_mode, 8);
 	res.mode = get_mod(str, buff);

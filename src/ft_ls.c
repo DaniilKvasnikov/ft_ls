@@ -1,10 +1,9 @@
 
 #include "ft_ls.h"
 
-void
-	ft_free_ls(t_path_info *info, int len, char *flag)
+void ft_free_ls(t_path_info *info, int len, char *flag)
 {
-	int			i;
+	int i;
 
 	i = -1;
 	while (++i < len)
@@ -19,7 +18,7 @@ void
 }
 
 static int
-	skeep_folder(char *name)
+skeep_folder(char *name)
 {
 	if (ft_strcmp(name, ".") == 0)
 		return (1);
@@ -29,9 +28,9 @@ static int
 }
 
 static void
-	free_path(char **paths)
+free_path(char **paths)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (paths[++i] != 0)
@@ -39,12 +38,11 @@ static void
 	free(paths);
 }
 
-void
-	start_recursion(char *path, t_path_info *info, int len, char *flag)
+void start_recursion(char *path, t_path_info *info, int len, char *flag)
 {
-	char	**paths;
-	int		len_p;
-	int		i;
+	char **paths;
+	int len_p;
+	int i;
 
 	len_p = 0;
 	i = -1;
@@ -64,8 +62,7 @@ void
 	free_path(paths);
 }
 
-void
-	ft_error(char *path)
+void ft_error(char *path)
 {
 	ft_printf("%s:\n", path);
 	ft_putstr_fd("ls: ", 2);
@@ -73,8 +70,7 @@ void
 	ft_putstr_fd(": Permission denied\n", 2);
 }
 
-void
-	ft_ls_dop(char **path, char *flag, int is_recursion)
+void ft_ls_dop(char **path, char *flag, int is_recursion)
 {
 	int			i;
 	int			len;
@@ -82,7 +78,7 @@ void
 	int			path_len;
 
 	if (!check_flags_ls(flag))
-		return ;
+		return;
 	i = -1;
 	path_len = 0;
 	while (path[++i] != 0)
@@ -114,8 +110,7 @@ void
 	}
 }
 
-void
-	ft_ls(char **path, char *flag)
+void ft_ls(char **path, char *flag)
 {
 	ft_ls_dop(path, flag, 0);
 }
