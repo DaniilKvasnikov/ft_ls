@@ -1,26 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 20:13:32 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 20:15:25 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
 # include "ft_printf.h"
-#include <sys/types.h>
-#include <dirent.h>
+# include <sys/types.h>
+# include <dirent.h>
 
-#include <sys/types.h> 
-#include <sys/stat.h> 
-#include <unistd.h>
-#include <pwd.h>
-#include <grp.h>
-#include <time.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <unistd.h>
+# include <pwd.h>
+# include <grp.h>
+# include <time.h>
 
-#define PER_DEN -1
-#define NOT_FOUND -2
-#define ITS_FILE 1
+# define PER_DEN -1
+# define NOT_FOUND -2
+# define ITS_FILE 1
 
-typedef struct  dirent	t_dirent;
-typedef struct  stat	t_stat;
-typedef struct  passwd	t_passwd;
-typedef struct  group	t_group;
+typedef struct dirent	t_dirent;
+typedef struct stat		t_stat;
+typedef struct passwd	t_passwd;
+typedef struct group	t_group;
 
 typedef struct	s_path_info
 {

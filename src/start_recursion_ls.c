@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start_recursion_ls.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 20:23:26 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 20:44:03 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
@@ -11,11 +22,12 @@ static int
 	return (0);
 }
 
-void start_recursion_ls(char *path, t_path_info *info, int len, char *flag)
+void
+	start_recursion_ls(char *path, t_path_info *info, int len, char *flag)
 {
-	char **paths;
-	int len_p;
-	int i;
+	char	**paths;
+	int		len_p;
+	int		i;
 
 	len_p = 0;
 	i = -1;

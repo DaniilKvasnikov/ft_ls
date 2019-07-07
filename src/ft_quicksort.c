@@ -1,4 +1,14 @@
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_quicksort.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 20:31:08 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 21:25:39 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
@@ -13,29 +23,14 @@ void
 }
 
 static int
-	get_cmp_str(char *s1, char *s2)
-{
-	char    *str1;
-	char    *str2;
-	int     cmp;
-
-	str1 = ft_str_tolower(ft_strdup(s1));
-	str2 = ft_str_tolower(ft_strdup(s2));
-	cmp = ft_strcmp(str1, str2);
-	free(str1);
-	free(str2);
-	return (cmp);
-}
-
-static int
 	ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag)
 {
 	int		name;
 	double	time_c;
 	int		cmp;
 
-	name = get_cmp_str(obj1->name, obj2->name);
-	time_c = (obj2->time_c - obj1->time_c);
+	name = ft_strcmp(obj1->name, obj2->name);
+	time_c = (obj2->time_m - obj1->time_m);
 	if (!is_flag_ls(flag, 't'))
 		cmp = name;
 	else if (time_c == 0)
@@ -51,11 +46,11 @@ static int
 static int
 	partition(t_path_info *arr, int low, int high, char *flag)
 {
-	t_path_info pivot;
-	int         i;
-	int         j;
+	t_path_info	pivot;
+	int			i;
+	int			j;
 
-	pivot = arr[high];  
+	pivot = arr[high];
 	i = (low - 1);
 	j = low - 1;
 	while (++j <= (high - 1))

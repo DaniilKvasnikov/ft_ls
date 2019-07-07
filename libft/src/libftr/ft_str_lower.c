@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stat.c                                          :+:      :+:    :+:   */
+/*   ft_str_lower.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 20:31:30 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 20:54:34 by rrhaenys         ###   ########.fr       */
+/*   Created: 2019/07/07 20:31:49 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 20:32:06 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-void
-	ft_stat(char *path, t_stat *buff)
+char
+	*ft_str_tolower(char *str)
 {
-	if (!is_link_path(path))
-		stat(path, buff);
-	else
-		lstat(path, buff);
+	int i;
+	int len;
+
+	len = ft_strlen(str);
+	i = -1;
+	while (++i < len)
+		str[i] = ft_tolower(str[i]);
+	return (str);
 }

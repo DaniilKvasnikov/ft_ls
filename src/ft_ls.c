@@ -1,28 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 20:27:47 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 21:09:54 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
 static void
-	ft_print_body(char **path, char *flag, int is_recursion, int i, int path_len)
+	ft_print_body(char *path, char *flag, int is_recursion, int path_len)
 {
 	t_ls_block	block;
 	int			len;
 
-	block = ft_print_dir(path[i], flag, &len);
-	if (i > 0 || is_recursion)
-		ft_printf("\n");
-	if (i > 0 && is_folder_path(path[i]) && !is_folder_path(path[i - 1]))
-		ft_printf("\n");
+	block = ft_print_dir(path, flag, &len);
 	if (block.error == 0)
 	{
 		if (path_len > 1 || is_recursion)
-			ft_printf("%s:\n", path[i]);
+			ft_printf("%s:\n", path);
 		ft_print_ls(block, len, flag);
 		if (is_flag_ls(flag, 'R'))
-			start_recursion_ls(path[i], block.info, len, flag);
+			start_recursion_ls(path, block.info, len, flag);
 		ft_free_ls(block.info, len);
 	}
 	else if (block.error == PER_DEN)
-		ft_error_denied(path[i]);
+		ft_error_denied(path);
 	else if (block.error == ITS_FILE)
 	{
 		ft_print_ls(block, len, flag);
@@ -37,14 +44,20 @@ int
 	int			path_len;
 
 	if (!check_flags_ls(flag))
-		return (2);
+		return (1);
 	i = -1;
 	path_len = 0;
 	while (path[++i] != 0)
 		++path_len;
 	i = -1;
 	while (path[++i] != 0)
-		ft_print_body(path, flag, is_recursion, i, path_len);
+	{
+		if (i > 0 || is_recursion)
+			ft_printf("\n");
+		if (i > 0 && is_folder_path(path[i]) && !is_folder_path(path[i - 1]))
+			ft_printf("\n");
+		ft_print_body(path[i], flag, is_recursion, path_len);
+	}
 	return (0);
 }
 

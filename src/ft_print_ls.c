@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_ls.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/07 20:30:51 by rrhaenys          #+#    #+#             */
+/*   Updated: 2019/07/07 20:39:42 by rrhaenys         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_ls.h"
 
@@ -29,7 +40,8 @@ void
 	total = 0;
 	i = -1;
 	while (++i < len)
-		total += b.info[i].buff.st_blocks * (b.info[i].name[0] != '.');
+		total += b.info[i].buff.st_blocks *
+			(b.info[i].name[0] != '.' || is_flag_ls(flag, 'a'));
 	if (len > 0 && is_flag_ls(flag, 'l'))
 		ft_printf("total %d\n", total);
 }
