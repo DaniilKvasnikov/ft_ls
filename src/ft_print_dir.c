@@ -93,8 +93,10 @@ t_path_info
 	res.link_name = get_link_ls(name, path);
 	free(name_path);
 	res.time = ft_strdup(ctime(&buff.st_ctime) + 4);
-	res.time[12] = '\0';
-	res.time_all = buff.st_ctime;
+	res.time[15] = '\0';
+	res.time_a = buff.st_atime;
+	res.time_m = buff.st_mtime;
+	res.time_c = buff.st_ctime;
 	res.folder = is_folder(buff);
 	str = ft_rebase(buff.st_mode, 8);
 	res.mode = get_mod(str, buff);

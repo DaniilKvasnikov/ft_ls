@@ -30,7 +30,9 @@ typedef struct	s_path_info
 	char				*time;
 	t_passwd			*owner;
 	t_group				*group;
-	long long			time_all;
+	double				time_a;
+	double				time_m;
+	double				time_c;
 	int					folder;
 	int					link;
 	char				*link_name;
