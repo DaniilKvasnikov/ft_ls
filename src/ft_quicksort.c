@@ -3,26 +3,13 @@
 #include "ft_ls.h"
 
 void
-	swap(t_path_info *a, t_path_info *b)
+	swap_ls(t_path_info *a, t_path_info *b)
 {
 	t_path_info tmp;
 
 	tmp = *a;
 	*a = *b;
 	*b = tmp;
-}
-
-char
-	*ft_str_lower(char *str)
-{
-	int i;
-	int len;
-
-	len = ft_strlen(str);
-	i = -1;
-	while (++i < len)
-		str[i] = ft_tolower(str[i]);
-	return (str);
 }
 
 static int
@@ -32,8 +19,8 @@ static int
 	char    *str2;
 	int     cmp;
 
-	str1 = ft_str_lower(ft_strdup(s1));
-	str2 = ft_str_lower(ft_strdup(s2));
+	str1 = ft_str_tolower(ft_strdup(s1));
+	str2 = ft_str_tolower(ft_strdup(s2));
 	cmp = ft_strcmp(str1, str2);
 	free(str1);
 	free(str2);
@@ -41,30 +28,18 @@ static int
 }
 
 static int
-	ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag, int i, int j)
+	ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag)
 {
 	int		name;
-	double	time_a;
-	double	time_m;
 	double	time_c;
-	int		ino;
 	int		cmp;
 
 	name = get_cmp_str(obj1->name, obj2->name);
-	time_a = (obj2->time_a - obj1->time_a);
-	time_m = (obj2->time_m - obj1->time_m);
 	time_c = (obj2->time_c - obj1->time_c);
-	ino = (obj2->buff.st_ino - obj1->buff.st_ino);
 	if (!is_flag_ls(flag, 't'))
 		cmp = name;
-	// else if (time_c == 0 && time_a!= 0)
-	// 	cmp = time_a;
-	// else if (time_c == 0 && time_m!= 0)
-	// 	cmp = time_m;
 	else if (time_c == 0)
-	{
-		cmp = cmp;
-	}
+		cmp = name;
 	else
 		cmp = time_c;
 	if (is_flag_ls(flag, 'r'))
@@ -85,13 +60,13 @@ static int
 	j = low - 1;
 	while (++j <= (high - 1))
 	{
-		if (ft_cmp(&arr[j], &pivot, flag, j, high))
+		if (ft_cmp(&arr[j], &pivot, flag))
 		{
 			i++;
-			swap(&arr[i], &arr[j]);
+			swap_ls(&arr[i], &arr[j]);
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
+	swap_ls(&arr[i + 1], &arr[high]);
 	return (i + 1);
 }
 

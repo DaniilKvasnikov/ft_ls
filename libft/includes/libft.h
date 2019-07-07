@@ -33,6 +33,7 @@ typedef struct	s_vect
 	size_t		size;
 }				t_vect;
 
+int				ft_num_len(int n);
 int				get_next_line(const int fd, char **line);
 void			*ft_memset(void *str, int c, size_t n);
 void			ft_bzero(void *str, size_t n);
@@ -65,6 +66,7 @@ int				ft_isascii(int c);
 int				ft_isprint(int c);
 int				ft_toupper(int c);
 int				ft_tolower(int c);
+char			*ft_str_tolower(char *str);
 void			*ft_memalloc(size_t size);
 void			ft_memdel(void **ap);
 char			*ft_strnew(size_t size);
@@ -103,5 +105,6 @@ void			ft_puts(char *str);
 int				*ft_range(int min, int max);
 char			*ft_rebase(unsigned long long n, int base);
 void			ft_toupper_str(char *str);
+char			*ft_stradd_3(char *s1, char *s2, char *s3);
 
 #endif

@@ -9,36 +9,46 @@
 #    Updated: 2019/02/20 17:23:15 by rrhaenys         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 NAME = ft_ls
-COMMAND = gcc
-FLAGS = #-Wall -Wextra -Werror
-SRC_DIR = src/
-SRC_FIL = $(shell ls src | grep -E ".+\.c")
-SRCS = $(addprefix  $(SRC_DIR), $(SRC_FIL))
-OBJ	= $(SRCS:.c=.o)
-INCLUDE = -I libft/src -I includes
-LIB = ./libft/libft.a
+
+ifndef VERBOSE
+MAKEFLAGS += --no-print-directory
+endif
+
+### PATH ###
+SRCS_PATH = src/
+OBJ_PATH  = obj/
+LIBFT_PATH = libft/
+
+FLAGS = -Wall -Werror -Wextra
+INC = -I ./includes/ -I ./$(LIBFT_PATH)includes/
+
+SRCS_NAME = $(shell ls src | grep -E ".+\.c")
+
+SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
+OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
 
 all: $(NAME)
 
-$(LIB):
-	make -C libft
+$(NAME): $(OBJ)
+	@make -w -C $(LIBFT_PATH)
+	@echo "\033[92m$(LIBFT_PATH)\033[0m compiled."
+	@gcc $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME)
+	@echo "\033[35m$(NAME)\033[0m created."
 
-$(NAME): $(LIB) $(OBJ)
-	$(COMMAND) $(FLAGS) -g -o $(NAME) $(INCLUDE) $(OBJ) $(LIB)
-
-.c.o:
-	$(COMMAND) $(FLAGS) $(INCLUDE) -g -c -o $@ $<
-
+$(OBJ_PATH)%.o: $(SRCS_PATH)%.c
+	@mkdir -p obj
+	@gcc -c $(FLAGS) $(INC) $< -o $@
+	@echo "\033[33m$<\033[0m compiled."
+	
 clean:
-	make -C libft clean
-	/bin/rm -f $(OBJ)
-
+	@make -w -C $(LIBFT_PATH)/ clean
+	@/bin/rm -rf $(OBJ_PATH)
+	
 fclean: clean
-	make -C libft fclean
-	/bin/rm -f $(NAME)
-
+	@make -w -C $(LIBFT_PATH)/ fclean
+	@/bin/rm -rf $(NAME)
+	
 re: fclean all
 
-.PHONY: clean fclean all re
+.PHONY: all, clean, fclean, re

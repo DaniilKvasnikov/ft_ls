@@ -12,6 +12,20 @@ static char
 	return (res);
 }
 
+static int
+	ft_get_len_path(int argc, char **argv)
+{
+	int		len;
+	int		i;
+
+	len = 0;
+	i = -1;
+	while (++i < argc)
+		if (!(argv[i][0] == '-' && ft_strlen(argv[i]) > 1))
+			len++;
+	return (len);
+}
+
 char
 	**set_paths(int argc, char **argv)
 {
@@ -20,11 +34,7 @@ char
 	int		len;
 	char	**res;
 
-	len = 0;
-	i = -1;
-	while (++i < argc)
-		if (!(argv[i][0] == '-' && ft_strlen(argv[i]) > 1))
-			len++;
+	len = ft_get_len_path(argc, argv);
 	if (len > 0)
 		res = (char **)malloc(sizeof(char *) * (len + 1));
 	else

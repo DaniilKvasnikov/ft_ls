@@ -1,18 +1,17 @@
 
 #include "ft_ls.h"
 
-int
-	error_log(char *str, char c)
+int	error_log(char *str, char c)
 {
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
-	ft_putstr_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1] [file ...]\n", 2);
+	ft_putstr_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1]", 2);
+	ft_putstr_fd(" [file ...]\n", 2);
 	return (0);
 }
 
-int
-	is_flag_ls(char *flags, char flag)
+int	is_flag_ls(char *flags, char flag)
 {
 	int	i;
 
@@ -23,8 +22,7 @@ int
 	return (0);
 }
 
-int
-	check_flags_ls(char *flag)
+int	check_flags_ls(char *flag)
 {
 	int	i;
 

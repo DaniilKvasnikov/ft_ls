@@ -1,14 +1,30 @@
 
 #include "ft_ls.h"
 
-#include <stdio.h>
+static int
+	ft_print_ls_l(t_path_info *info, char *flag, char *str)
+{
+	if (is_flag_ls(flag, 'l'))
+	{
+		if (info->name[0] != '.' || is_flag_ls(flag, 'a'))
+		{
+			ft_printf(str, info->mode, info->buff.st_nlink,
+				info->owner->pw_name, info->group->gr_name,
+				info->buff.st_size, info->time, info->name);
+			if (info->link != 0)
+				ft_printf(" -> %s", info->link_name);
+			ft_printf("\n");
+		}
+		return (1);
+	}
+	return (0);
+}
 
 void
-	ft_print_ls(t_ls_block b, int len, char *flag)
+	ft_print_total(t_ls_block b, int len, char *flag)
 {
 	int			total;
 	int			i;
-	char		*str;
 
 	total = 0;
 	i = -1;
@@ -16,24 +32,21 @@ void
 		total += b.info[i].buff.st_blocks * (b.info[i].name[0] != '.');
 	if (len > 0 && is_flag_ls(flag, 'l'))
 		ft_printf("total %d\n", total);
+}
+
+void
+	ft_print_ls(t_ls_block b, int len, char *flag)
+{
+	int			i;
+	char		*str;
+
+	ft_print_total(b, len, flag);
 	if (len > 0)
-		str = get_print_str(b.info, 0, len - 1);
+		str = get_print_str(b.info, len - 1);
 	i = -1;
 	while (++i < len)
 	{
-		if (is_flag_ls(flag, 'l'))
-		{
-			if (b.info[i].name[0] != '.' || is_flag_ls(flag, 'a'))
-			{
-				ft_printf(str, b.info[i].mode, b.info[i].buff.st_nlink,
-					b.info[i].owner->pw_name, b.info[i].group->gr_name,
-					b.info[i].buff.st_size, b.info[i].time, b.info[i].name);
-				if (b.info[i].link != 0)
-					ft_printf(" -> %s", b.info[i].link_name);
-				ft_printf("\n");
-			}
-		}
-		else
+		if (!ft_print_ls_l(&b.info[i], flag, str))
 		{
 			if (b.info[i].name[0] != '.' || is_flag_ls(flag, 'a'))
 				ft_printf("%s", b.info[i].name);

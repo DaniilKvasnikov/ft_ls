@@ -19,7 +19,7 @@
 # include <unistd.h>
 # include "ft_rrhaenys.h"
 # include "ft_rgyles.h"
-# include "libftr/libft.h"
+# include "libft.h"
 
 int		ft_printf(const char *format, ...);
 int		ft_init_structure(t_spec *elem, char *str);
