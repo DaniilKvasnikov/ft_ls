@@ -21,7 +21,7 @@ void
 	*a = *b;
 	*b = tmp;
 }
-
+#include <stdio.h>
 static int
 	ft_cmp(t_path_info *obj1, t_path_info *obj2, char *flag)
 {
@@ -29,7 +29,7 @@ static int
 	double	time_c;
 	int		cmp;
 
-	name = ft_strcmp(obj1->name, obj2->name);
+	name = ft_strcmp(obj2->name, obj1->name);
 	time_c = (obj2->time_m - obj1->time_m);
 	if (!is_flag_ls(flag, 't'))
 		cmp = name;
@@ -37,6 +37,7 @@ static int
 		cmp = name;
 	else
 		cmp = time_c;
+	printf("%s - %s name=%d time=%f\n", obj1->name, obj2->name, name, time_c);
 	if (is_flag_ls(flag, 'r'))
 		return (cmp >= 0);
 	else

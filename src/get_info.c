@@ -19,13 +19,14 @@ t_path_info
 	t_path_info	res;
 	char		*str;
 	char		*name_path;
+	int			res_stat;
 
 	name_path = ft_stradd_3(path, "/", name);
-	lstat(name_path, &buff1);
+	res_stat = stat(name_path, &buff1);
+	free(name_path);
 	res.link = is_link;
 	res.link_name = get_link_name(name, path);
-	free(name_path);
-	res.time = ft_strdup(ctime(&buff1.st_ctime) + 4);
+	res.time = ft_strdup(ctime(&buff1.st_mtime) + 4);
 	res.time[12] = '\0';
 	res.time_a = buff1.st_atime;
 	res.time_m = buff1.st_mtime;
@@ -38,5 +39,7 @@ t_path_info
 	res.buff = buff1;
 	res.owner = getpwuid(buff1.st_uid);
 	res.group = getgrgid(buff1.st_gid);
+	if (res_stat < 0)
+		res.owner = NULL;
 	return (res);
 }
