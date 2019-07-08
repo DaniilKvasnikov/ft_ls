@@ -60,11 +60,11 @@ void
 	{
 		if (!ft_print_ls_l(&b.info[i], flag, str))
 		{
-			if (b.info[i].name[0] != '.' || is_flag_ls(flag, 'a'))
-				ft_printf("%s", b.info[i].name);
-			if ((b.info[i].name[0] != '.' || is_flag_ls(flag, 'a')) &&
-					b.error != ITS_FILE)
+			ft_printf("%s", b.info[i].name);
+			if (is_flag_ls(flag, '1') || i == (len - 1))
 				ft_putchar('\n');
+			else
+				ft_putchar(' ');
 		}
 	}
 	if (len > 0)

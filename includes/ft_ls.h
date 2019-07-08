@@ -77,7 +77,7 @@ int				is_link_path(char *path);
 int				is_folder(t_stat buff);
 int				is_folder_path(char *path);
 
-void			ft_path_sort(char	**paths);
+void			ft_path_sort(char **paths, char *flag);
 
 void			start_recursion_ls(char *path, t_path_info *info, int len,
 									char *flag);

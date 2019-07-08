@@ -17,7 +17,7 @@ int	error_log(char *str, char c)
 	ft_putstr_fd(str, 2);
 	ft_putchar_fd(c, 2);
 	ft_putchar_fd('\n', 2);
-	ft_putstr_fd("usage: ls [-ABCFGHLOPRSTUWabcdefghiklmnopqrstuwx1]", 2);
+	ft_putstr_fd("usage: ls [-Ralrt1]", 2);
 	ft_putstr_fd(" [file ...]\n", 2);
 	return (0);
 }

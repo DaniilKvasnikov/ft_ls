@@ -41,8 +41,7 @@ void
 		if (info[i].folder && !skeep_folder(info[i].name))
 			paths[++len_p] = ft_stradd_3(path, "/", info[i].name);
 	paths[len_p + 1] = 0;
-	if (is_flag_ls(flag, 'R'))
-		ft_path_sort(paths);
+	ft_path_sort(paths, flag);
 	ft_ls_dop(paths, flag, 1);
 	free_path(paths);
 }

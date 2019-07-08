@@ -21,8 +21,7 @@ int
 
 	paths = set_paths(--argc, ++argv);
 	flags = set_flags(argc, argv);
-	if (is_flag_ls(flags, 'R'))
-		ft_path_sort(paths);
+	ft_path_sort(paths, flags);
 	res = ft_ls(paths, flags);
 	free_path(paths);
 	free(flags);
