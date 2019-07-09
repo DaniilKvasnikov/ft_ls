@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:33:53 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 20:58:46 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/09 07:51:29 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_path_info
 	int			res_stat;
 
 	name_path = ft_stradd_3(path, "/", name);
-	res_stat = stat(name_path, &buff1);
+	res_stat = ft_stat(name_path, &buff1);
 	free(name_path);
 	res.link = is_link;
 	res.link_name = get_link_name(name, path);

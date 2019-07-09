@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:13:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 20:15:25 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/09 07:52:00 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				get_info_gr_name(t_path_info obj);
 int				get_info_time(t_path_info obj);
 int				get_info_d_name(t_path_info obj);
 
-void			ft_stat(char *path, t_stat *buff);
+int				ft_stat(char *path, t_stat *buff);
 t_path_info		get_info(char *name, char *path, int is_link);
 char			*get_link_name(char *name, char *path);
 char			*get_mod(char *mod, t_stat buff);

@@ -6,17 +6,17 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:31:30 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 20:54:34 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/09 07:51:48 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void
+int
 	ft_stat(char *path, t_stat *buff)
 {
 	if (!is_link_path(path))
-		stat(path, buff);
+		return (stat(path, buff));
 	else
-		lstat(path, buff);
+		return (lstat(path, buff));
 }

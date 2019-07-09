@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:27:47 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 21:09:54 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/09 07:46:19 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void
 	{
 		if (is_recursion)
 			ft_printf("\n%s:\n", path);
-		else if (is_folder_path(path) && (path_len > 1) || is_flag_ls(flag, 'R'))
+		else if ((is_folder_path(path) && (path_len > 1)))
 		{
 			if (i > 0)
 				ft_printf("\n%s:\n", path);
