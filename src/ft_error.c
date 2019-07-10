@@ -13,11 +13,19 @@
 #include "ft_ls.h"
 
 int
-	ft_error_denied(char *path)
+	ft_error_denied(char *path, int path_len)
 {
-	ft_printf("%s:\n", path);
-	ft_putstr_fd("ls: ", 2);
-	ft_putstr_fd(path, 2);
-	ft_putstr_fd(": Permission denied\n", 2);
+	if (path_len == 1)
+	{
+		ft_putstr_fd("ls: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
+	else
+	{
+		ft_printf("%s:\n", path);
+		ft_putstr_fd("ls: ", 2);
+		ft_putstr_fd(": Permission denied\n", 2);
+	}
 	return (0);
 }

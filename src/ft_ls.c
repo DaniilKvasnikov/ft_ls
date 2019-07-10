@@ -36,7 +36,7 @@ static void
 		ft_free_ls(block.info, len);
 	}
 	else if (block.error == PER_DEN)
-		ft_error_denied(path);
+		ft_error_denied(path, path_len);
 	else if (block.error == ITS_FILE)
 	{
 		ft_print_ls(block, len, flag);

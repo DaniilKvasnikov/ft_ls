@@ -5,12 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "lldb",
+            "name": "(lldb) Launch",
+            "type": "cppdbg",
             "request": "launch",
-            "name": "Debug",
-            "program": "./ft_ls",
-            "args": ["a"],
-            "cwd": "./src/"
+            "program": "/Users/rrhaenys/ft_ls/ft_ls",
+            "args": ["-l", "dev"],
+            "stopAtEntry": false,
+            "cwd": "/Users/rrhaenys/ft_ls",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb"
         }
     ]
 }

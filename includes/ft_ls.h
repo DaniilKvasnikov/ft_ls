@@ -98,7 +98,7 @@ char			*get_mod(char *mod, t_stat buff);
 void			free_path(char **paths);
 void			ft_free_ls(t_path_info *info, int len);
 
-int				ft_error_denied(char *path);
+int				ft_error_denied(char *path, int path_len);
 
 int				ft_count_dir_ls(char *path, char *flag);
 
