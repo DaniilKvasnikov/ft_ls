@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:33:53 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/12 14:14:36 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:42:58 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char
 	int		size;
 
 	delta_time = time(NULL) - buff1.st_mtime;
-	// return (ft_strdup(ctime(&buff1.st_mtime)));
 	time_res = ft_strdup(ctime(&buff1.st_mtime) + 4);
 	if (delta_time < (60 * 60 * 24 * 30 * 6) && delta_time > (-60 * 60))
 		time_res[12] = '\0';
@@ -54,7 +53,6 @@ t_path_info
 	res.link = is_link;
 	res.link_name = get_link_name(name, path);
 	res.time = get_time(buff1);
-	res.time_a = buff1.st_atime;
 	res.time_m = buff1.st_mtime;
 	res.time_c = buff1.st_ctime;
 	res.folder = is_folder(buff1);

@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:13:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/12 13:34:47 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:49:34 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,19 @@ typedef struct	s_ls_block
 	int			error;
 }				t_ls_block;
 
+typedef struct	s_print_body
+{
+	int			is_recursion;
+	int			path_len;
+	int			i;
+}				t_print_body;
+
 char			**set_paths(int argc, char **argv);
 char			*set_flags(int argc, char **argv);
 int				ft_ls(char **path, char *flag);
 t_ls_block		ft_print_dir(char *path, char *flag, int *len);
-void			ft_print_ls(t_ls_block block, int len, char *flag, int is_folder);
+void			ft_print_ls(t_ls_block block, int len, char *flag,
+							int is_folder);
 
 char			*get_print_str(t_path_info *info, int max);
 

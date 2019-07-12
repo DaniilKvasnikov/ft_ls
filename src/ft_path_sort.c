@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:30:10 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/12 14:35:41 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:44:27 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int
 	t_stat	buff2;
 	double	time_c;
 	int		cmp;
-
 
 	ft_stat(obj1, &buff1);
 	ft_stat(obj2, &buff2);
@@ -89,7 +88,6 @@ void
 	int			i;
 	int			len;
 	char		*tmp;
-	int			fol;
 
 	len = -1;
 	while (paths[++len] != 0)
@@ -98,18 +96,18 @@ void
 	while (++i < len)
 	{
 		if (i == (len - 1))
-			break;
+			break ;
 		if (is_folder_path(paths[i]) && !is_folder_path(paths[i + 1]))
 		{
 			swap_ls(&paths[i], &paths[i + 1]);
 			i = -1;
 		}
 	}
-	fol = -1;
-	while (paths[++fol] != 0 && !is_folder_path(paths[fol]))
+	i = -1;
+	while (paths[++i] != 0 && !is_folder_path(paths[i]))
 		;
-	if (fol > 0)
-		ft_quicksort_path(paths, 0, fol - 1, flag);
-	if (fol < len)
-		ft_quicksort_path(paths, fol, len - 1, flag);
+	if (i > 0)
+		ft_quicksort_path(paths, 0, i - 1, flag);
+	if (i < len)
+		ft_quicksort_path(paths, i, len - 1, flag);
 }
