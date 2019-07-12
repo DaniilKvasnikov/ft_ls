@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:30:10 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/07 20:40:09 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:35:41 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int
 	ft_stat(obj1, &buff1);
 	ft_stat(obj2, &buff2);
 	name = ft_strcmp(obj2, obj1);
-	time_c = (buff1.st_ctime - buff2.st_ctime);
+	time_c = (buff1.st_mtime - buff2.st_mtime);
 	if (!is_flag_ls(flag, 't'))
 		cmp = name;
 	else if (time_c == 0)
