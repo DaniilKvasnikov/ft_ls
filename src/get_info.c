@@ -6,11 +6,30 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:33:53 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/09 07:51:29 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:28:34 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+char
+	*get_time(t_stat buff1)
+{
+	char	*time_res;
+	double	delta_time;
+
+	delta_time = time(NULL) - buff1.st_mtime;
+	// res.time = ft_strdup(ctime(&buff1.st_mtime) + 4);
+	time_res = ft_strdup(ctime(&buff1.st_mtime) + 4);
+	if (delta_time < (60 * 60 * 24 * 30 * 6) && delta_time > (-60 * 60))
+		time_res[12] = '\0';
+	else
+	{
+		ft_strncpy(time_res + 7, time_res + 15, 5);
+		time_res[12] = '\0';
+	}
+	return (time_res);
+}
 
 t_path_info
 	get_info(char *name, char *path, int is_link)
@@ -26,8 +45,7 @@ t_path_info
 	free(name_path);
 	res.link = is_link;
 	res.link_name = get_link_name(name, path);
-	res.time = ft_strdup(ctime(&buff1.st_mtime) + 4);
-	res.time[12] = '\0';
+	res.time = get_time(buff1);
 	res.time_a = buff1.st_atime;
 	res.time_m = buff1.st_mtime;
 	res.time_c = buff1.st_ctime;
