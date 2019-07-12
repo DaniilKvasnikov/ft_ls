@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:27:47 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/12 12:59:42 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:35:13 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void
 			else
 				ft_printf("%s:\n", path);
 		}
-		ft_print_ls(block, len, flag);
+		ft_print_ls(block, len, flag, 1);
 		if (is_flag_ls(flag, 'R'))
 			start_recursion_ls(path, block.info, len, flag);
 		ft_free_ls(block.info, len);
@@ -39,7 +39,7 @@ static void
 		ft_error_denied(path, path_len);
 	else if (block.error == ITS_FILE)
 	{
-		ft_print_ls(block, len, flag);
+		ft_print_ls(block, len, flag, 0);
 		ft_free_ls(block.info, len);
 	}
 }

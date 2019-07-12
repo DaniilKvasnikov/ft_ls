@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:33:53 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/12 13:28:34 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 14:14:36 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,24 @@ char
 {
 	char	*time_res;
 	double	delta_time;
+	int		i;
+	int		size;
 
 	delta_time = time(NULL) - buff1.st_mtime;
-	// res.time = ft_strdup(ctime(&buff1.st_mtime) + 4);
+	// return (ft_strdup(ctime(&buff1.st_mtime)));
 	time_res = ft_strdup(ctime(&buff1.st_mtime) + 4);
 	if (delta_time < (60 * 60 * 24 * 30 * 6) && delta_time > (-60 * 60))
 		time_res[12] = '\0';
 	else
 	{
-		ft_strncpy(time_res + 7, time_res + 15, 5);
-		time_res[12] = '\0';
+		i = 15;
+		while (time_res[i] == ' ')
+			i++;
+		size = 0;
+		while (time_res[i + size] >= '0' && time_res[i + size] <= '9')
+			size++;
+		ft_strncpy(time_res + 7, time_res + i - 1, size + 1);
+		time_res[8 + size] = '\0';
 	}
 	return (time_res);
 }

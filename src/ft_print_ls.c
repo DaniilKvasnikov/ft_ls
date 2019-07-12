@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:30:51 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/09 07:42:21 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:35:22 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ void
 }
 
 void
-	ft_print_ls(t_ls_block b, int len, char *flag)
+	ft_print_ls(t_ls_block b, int len, char *flag, int is_folder)
 {
 	int			i;
 	char		*str;
 
-	ft_print_total(b, len, flag);
+	if (is_folder == 1)
+		ft_print_total(b, len, flag);
 	if (len > 0)
 		str = get_print_str(b.info, len - 1);
 	i = -1;

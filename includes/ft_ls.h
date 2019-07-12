@@ -6,7 +6,7 @@
 /*   By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/07 20:13:32 by rrhaenys          #+#    #+#             */
-/*   Updated: 2019/07/09 07:52:00 by rrhaenys         ###   ########.fr       */
+/*   Updated: 2019/07/12 13:34:47 by rrhaenys         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char			**set_paths(int argc, char **argv);
 char			*set_flags(int argc, char **argv);
 int				ft_ls(char **path, char *flag);
 t_ls_block		ft_print_dir(char *path, char *flag, int *len);
-void			ft_print_ls(t_ls_block block, int len, char *flag);
+void			ft_print_ls(t_ls_block block, int len, char *flag, int is_folder);
 
 char			*get_print_str(t_path_info *info, int max);
 
